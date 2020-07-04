@@ -48,7 +48,7 @@ public class DownloadFileNAS {
 			return;
 		}
 		scp.put_SyncMustMatch(syn_must_math);// down tat ca cac file bat dau bang sinhvien
-		success = scp.SyncTreeDownload(server_path, server_path, mode_scp, false);
+		success = scp.SyncTreeDownload(server_path, local_path, mode_scp, false);
 		if (success != true) {
 			System.out.println(scp.lastErrorText());
 			return;
@@ -56,12 +56,12 @@ public class DownloadFileNAS {
 
 		ssh.Disconnect();
 	}
-	
+
 	public boolean downloadFileOnServer() {
 		boolean result = false;
 		sql = "SELECT * FROM scp";
 		try {
-			//1. select fields table SCP in data SCP using download
+			// 1. select fields table SCP in data SCP using download
 			pst = new ConnectionBD().getConnection("control_db").prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
@@ -97,7 +97,9 @@ public class DownloadFileNAS {
 
 		return result;
 	}
+
 	public static void main(String[] args) {
 		System.out.println(new DownloadFileNAS().downloadFileOnServer());
+		
 	}
 }
