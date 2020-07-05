@@ -13,7 +13,6 @@ public class MainTest {
 
 			AddData data = new AddData();
 			data.addData();
-			
 
 			System.out.println("success");
 		} catch (Exception e) {

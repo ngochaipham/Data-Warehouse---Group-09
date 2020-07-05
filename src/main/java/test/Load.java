@@ -50,8 +50,7 @@ public class Load {
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	LocalDateTime now = LocalDateTime.now();
 	String timestamp = dtf.format(now);
-	public static String LOCAL_PATH = "D:\\LAB_DW";
-
+	public static String LOCAL_PATH = "D:\\DW_LAB";
 
 	private PreparedStatement pst = null;
 	private ResultSet rs = null;
@@ -83,7 +82,7 @@ public class Load {
 		}
 		return true;
 	}
-
+//
 	public boolean insertDataLog() {
 		int rs = 0;
 		boolean check = false;
@@ -136,7 +135,7 @@ public class Load {
 
 	public void sendMailInsertLog() {
 		if (insertDataLog() != true) {
-			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WARHOUSE", "Download file & ghi log fail rồi đại ca");
+			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WARHO	USE", "Download file & ghi log fail rồi đại ca");
 			System.out.println("Gửi mai nội dung  fail...!");
 		} else {
 			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WARHOUSE", "Downoad file & ghi log success rồi nè ");
@@ -144,10 +143,10 @@ public class Load {
 		}
 	}
 
-	public static void main(String[] args)
-			throws SQLException, IOException, EncryptedDocumentException, InvalidFormatException {
+	public static void main(String[] args) {
 		Load ex = new Load();
 		ex.sendMailInsertLog();
+
 	}
 
 }
