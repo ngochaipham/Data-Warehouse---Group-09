@@ -21,6 +21,28 @@ public class ConnectionBD {
 		return myConnection;
 
 	}
+public static Connection getConnection(String nameDB, String userName, String passworDB) {
+
+		Connection myConnection = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String host = "jdbc:mysql://localhost:3307/" + nameDB;
+			String username = "root";
+			String password = "1234";
+			myConnection = DriverManager.getConnection(host, username, password);
+
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		return myConnection;
+
+	}
+
+	public static void main(String[] args) {
+		System.out.println(getConnection("control_db"));
+	}
+
 	public static void main(String[] args) {
 		System.out.println(getConnection("control_db"));
 	}
