@@ -1,0 +1,3 @@
+use staging;
+CREATE TABLE student (STT INT NOT NULL auto_increment, MSSV INT NOT NULL, ho VARCHAR(255) NOT NULL, ten VARCHAR(255) NOT NULL, dob date NOT NULL, lop VARCHAR(255),
+tenlop VARCHAR(255), sdt INT NOT NULL, email VARCHAR(255) NOT NULL, quequan VARCHAR(255) NOT NULL, ghichu TEXT, id_log INT, PRIMARY KEY (STT));
