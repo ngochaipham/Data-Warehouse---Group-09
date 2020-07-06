@@ -1,4 +1,4 @@
-package test;
+﻿package test;
 
 import connection.*;
 import java.io.BufferedReader;
@@ -97,7 +97,7 @@ public class Load {
 		for (int i = 0; i < listFileLog.length; i++) {
 			try {
 				pst = new ConnectionBD().getConnection("control_db").prepareStatement(sql);
-				pst.setString(1, listFileLog[i].getName());
+				pst.setString(1,localPath + "\\" + listFileLog[i].getName());
 				if (listFileLog[i].getName().substring(listFileLog[i].getName().lastIndexOf(".")).equals(".txt")) {
 					pst.setInt(2, 1);
 				} else if (listFileLog[i].getName().substring(listFileLog[i].getName().lastIndexOf("."))
