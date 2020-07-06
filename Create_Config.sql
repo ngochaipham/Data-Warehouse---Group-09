@@ -5,16 +5,16 @@ INSERT INTO config (name_database,username_database, password_database, query, u
 VALUES ("controll", "root", "", "", "guest_access", "123456", "sinhvien_sang_*.xlsx, sinhvien_chieu_*.xlsx", "/volume1/ECEP/song.nguyen/DW_2020/data", "data");
 
 INSERT INTO config (name_database,username_database, password_database, query) 
-VALUES ("controll", "root", "", "insert into log (urlLocal, status_download, status_upload_staging, status_upload_warehouse) values (?, ?, ?, ?)");
+VALUES ("control_db", "root", "", "insert into log (urlLocal, status_download, status_upload_staging) values (?, ?, ?, ?)");
 
 INSERT INTO config (name_database,username_database, password_database, query) 
-VALUES ("controll", "root", "", "SELECT * FROM log");
+VALUES ("control_db", "root", "", "SELECT * FROM log");
 
 INSERT INTO config (name_database,username_database, password_database, query) 
 VALUES ("staging", "root", "", "INSERT INTO student (MSSV, ho, ten, dob, lop, tenlop, sdt, email, quequan, ghichu, id_log) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
 INSERT INTO config (name_database,username_database, password_database, query) 
-VALUES ("controll", "root", "", "UPDATE log SET status_upload_staging = ?, status_upload_warehouse = ? WHERE id_log = ?");
+VALUES ("control_db", "root", "", "UPDATE log SET status_upload_staging = ?, WHERE id_log = ?");
 
 INSERT INTO config (name_database, username_database, password_database, query) 
 VALUES ("staging", "root", "", "SELECT * from student WHERE id_log = ?");
