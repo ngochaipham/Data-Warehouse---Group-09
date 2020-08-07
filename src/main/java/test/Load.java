@@ -135,10 +135,10 @@ public class Load {
 
 	public void sendMailInsertLog() {
 		if (insertDataLog() != true) {
-			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020", "Download file & ghi log fail rồi đại ca");
+			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020", "Download file & ghi log FAIL rồi đại ca");
 			System.out.println("Send Email- fail...!");
 		} else {
-			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020", "Downoad file & ghi log success rồi nè ");
+			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020", "Downoad file & ghi log SUCCESS rồi nè ");
 			System.out.println("Send Email- success...!");
 		}
 	}
