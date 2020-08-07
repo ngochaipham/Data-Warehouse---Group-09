@@ -36,7 +36,7 @@ public class Load {
 	// private Connection conn = null;
 	static final String NUMBER_REGEX = "^[0-9]+$";
 	private Connection connectionDB1;
-	// //==jdbc:mysql://localhost:3306/dwh_1
+	
 	private static String USER = "root";
 	private static String PASS = "";
 
@@ -55,7 +55,7 @@ public class Load {
 	private PreparedStatement pst = null;
 	private ResultSet rs = null;
 	private String sql;
-
+//Phương thức gửi mail
 	public static boolean sendMail(String to, String subject, String bodyMail) {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
