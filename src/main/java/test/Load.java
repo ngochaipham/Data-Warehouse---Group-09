@@ -1,6 +1,8 @@
-﻿package test;
+package test;
 
 import connection.*;
+import utils.Status;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,30 +34,27 @@ import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class Load {
-	// ConnectionBD connControlDB = null;
-	// private Connection conn = null;
+	
 	static final String NUMBER_REGEX = "^[0-9]+$";
 	private Connection connectionDB1;
-	
 	private static String USER = "root";
 	private static String PASS = "";
 
 	private static String hostName = "localhost";
 	private static String driver = "jdbc:mysql:";
-	private static String addressConfig = "localhost:3306/controldb";
-	private static String addressSource = "localhost:3306/datawarehouse";
+	Status status = new Status();
 
 	private static Connection con;
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	LocalDateTime now = LocalDateTime.now();
 	String timestamp = dtf.format(now);
-	public static String LOCAL_PATH = "D:\\DW_LAB";
+
 
 	private PreparedStatement pst = null;
 	private ResultSet rs = null;
 	private String sql;
-//Phương thức gửi mail
+
 	public static boolean sendMail(String to, String subject, String bodyMail) {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -82,36 +81,27 @@ public class Load {
 		}
 		return true;
 	}
+
 //
-	public boolean insertDataLog() {
-		int rs = 0;
+	
+	public boolean insertDataLog(int id) {
 		boolean check = false;
-		if (!new DownloadFileNAS().downloadFileOnServer()) {
+		if (!new DownloadFileNAS().downloadFileOnServer(id)) {
 			return check;
 		}
-		sql = "INSERT INTO log (file_name_,data_file_config_id,file_status,staging_load_counT, timestamp_download, timestamp_insert_staging, timestamp_insert_datawarehouse)"
-				+ " values (?,?,?,?,?,?,?)";
+		sql = "INSERT INTO log (name_log,status,localpath,data_file_config_id, time_stamp_download)" + " values (?,?,?,?,?)";
 
-		File localPath = new File(LOCAL_PATH);
+		File localPath = new File(DownloadFileNAS.LOCAL_PATH);
 		File[] listFileLog = localPath.listFiles();
 		for (int i = 0; i < listFileLog.length; i++) {
 			try {
-				pst = new ConnectionBD().getConnection("control_db").prepareStatement(sql);
-				pst.setString(1,localPath + "\\" + listFileLog[i].getName());
-				if (listFileLog[i].getName().substring(listFileLog[i].getName().lastIndexOf(".")).equals(".txt")) {
-					pst.setInt(2, 1);
-				} else if (listFileLog[i].getName().substring(listFileLog[i].getName().lastIndexOf("."))
-						.equals(".xlsx")) {
-					pst.setInt(2, 2);
-				} else {
-					pst.setInt(2, 3);
-				}
-				pst.setString(3, "NR");
-				pst.setInt(4, 0);
+				pst = new ConnectionBD().getConnection("control").prepareStatement(sql);
+				pst.setString(1, listFileLog[i].getName());
+				pst.setString(2, status.DOWNLOAD);	
+				pst.setString(3, localPath.getAbsolutePath());
+				pst.setInt(4, id);
 				pst.setString(5, timestamp);
-				pst.setString(6, null);
-				pst.setString(7, null);
-				rs = pst.executeUpdate();
+				pst.executeUpdate();
 				check = true;
 
 			} catch (Exception e) {
@@ -133,20 +123,21 @@ public class Load {
 
 	}
 
-	public void sendMailInsertLog() {
-		if (insertDataLog() != true) {
-			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020", "Download file & ghi log FAIL rồi đại ca");
-			System.out.println("Send Email- fail...!");
+	public void sendMailInsertLog(int id) {
+		if (insertDataLog(id) != true) {
+			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020",
+					"Fail rồi đại ca");
+			System.out.println("Loading On Log and Send Email FAIL...!");
 		} else {
-			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020", "Downoad file & ghi log SUCCESS rồi nè ");
-			System.out.println("Send Email- success...!");
+			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020",
+					"Ok rồi nè ");
+			System.out.println("Load On Log and Send Email SUCCESS...!");
 		}
 	}
 
 	public static void main(String[] args) {
 		Load ex = new Load();
-		ex.sendMailInsertLog();
-
+		ex.sendMailInsertLog(Integer.parseInt(args[0]));
 	}
 
 }
