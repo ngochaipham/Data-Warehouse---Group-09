@@ -159,7 +159,7 @@ public class Load {
 
 	public static void main(String[] args) {
 		Load ex = new Load();
-		ex.sendMailInsertLog(2);
+		ex.sendMailInsertLog(Integer.parseInt(args[0]));
 	}
 
 }
