@@ -36,8 +36,7 @@ import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class Load {
-	// ConnectionBD connControlDB = null;
-	// private Connection conn = null;
+	
 	static final String NUMBER_REGEX = "^[0-9]+$";
 	private Connection connectionDB1;
 	// //==jdbc:mysql://localhost:3306/dwh_1
@@ -46,8 +45,7 @@ public class Load {
 
 	private static String hostName = "localhost";
 	private static String driver = "jdbc:mysql:";
-	private static String addressConfig = "localhost:3306/controldb";
-	private static String addressSource = "localhost:3306/datawarehouse";
+	
 	Status status = new Status();
 
 	private static Connection con;
@@ -55,7 +53,7 @@ public class Load {
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	LocalDateTime now = LocalDateTime.now();
 	String timestamp = dtf.format(now);
-//	public static String LOCAL_PATH = "D:\\DW_LAB";
+
 
 	private PreparedStatement pst = null;
 	private ResultSet rs = null;
