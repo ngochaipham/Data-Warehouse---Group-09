@@ -148,14 +148,14 @@ public class Load {
 		}else {
 			config.setNameConfig("Load_students");
 		}
-		if (insertDataLog(config) != true) {
+		if (insertDataLog(id) != true) {
 			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020",
-					"Download file & ghi log fail rồi đại ca");
-			System.out.println("Send Email- fail...!");
+					"Fail rồi đại ca");
+			System.out.println("Loading On Log and Send Email FAIL...!");
 		} else {
 			sendMail("17130052@st.hcmuaf.edu.vn", "DATA WAREHOUSE Notification 2020",
-					"Downoad file & ghi log success rồi nè ");
-			System.out.println("Send Email- success...!");
+					"Ok rồi nè ");
+			System.out.println("Load On Log and Send Email SUCCESS...!");
 		}
 	}
 
