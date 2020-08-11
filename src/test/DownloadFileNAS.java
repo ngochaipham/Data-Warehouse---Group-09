@@ -63,7 +63,7 @@ public class DownloadFileNAS {
 		boolean result = false;
 		sql = "SELECT * FROM config where id_config = '" + id + "'";
 		try {
-			// 1. select fields table SCP in data SCP using download
+			// 1. select fields table config in data config using download
 			pst = new ConnectionBD().getConnection("control").prepareStatement(sql);
 			rs = pst.executeQuery();
 			while (rs.next()) {
